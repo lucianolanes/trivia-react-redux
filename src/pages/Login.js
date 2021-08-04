@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchToken } from '../redux/actions';
+import md5 from 'crypto-js/md5';
+import { fetchToken, getPlayerInfo } from '../redux/actions';
 import logo from '../trivia.png';
+const URL_GRAVATAR = 'https://www.gravatar.com/avatar/';
 
 class Login extends React.Component {
   constructor() {
@@ -10,10 +12,8 @@ class Login extends React.Component {
     this.state = {
       name: '',
       email: '',
-      picture: '',
       disableBtn: true,
     };
-    this.btnClickConfig = this.btnClickConfig.bind(this);
     this.btnClickPlay = this.btnClickPlay.bind(this);
     this.btnStats = this.btnStats.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -30,12 +30,13 @@ class Login extends React.Component {
   }
 
   btnClickPlay() {
-    console.log(this.props);
-    const { getToken } = this.props;
+    const { name, email} = this.state;
+    const { getPlayerInfo, getToken } = this.props;
+    const picture = URL_GRAVATAR + md5(email).toString();
+    const state = JSON.stringify({ name, email })
+    localStorage.setItem('state', `player: ${state}`);
+    getPlayerInfo({name, email, picture});
     getToken();
-  }
-
-  btnClickConfig() {
   }
 
   createInput(inputProperties) {
@@ -64,7 +65,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { createInput, handleChange, btnClickPlay, btnClickConfig } = this;
+    const { createInput, handleChange, btnClickPlay } = this;
     const { name, email, disableBtn } = this.state;
     return (
       <div className="App">
@@ -76,8 +77,7 @@ class Login extends React.Component {
             {createInput(['text', 'email', email, 'E-MAIL:', 'input-gravatar-email',
               handleChange])}
             {this.createBtn(['PLAY!!!', 'btn-play', disableBtn,'/trivia', btnClickPlay])}
-            {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false , '/config',
-               btnClickConfig])}
+            {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false , '/config', ])}
           </div>
         </header>
       </div>
@@ -87,6 +87,7 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   getToken: () => dispatch(fetchToken),
+  getPlayerInfo: (info) => dispatch(getPlayerInfo(info))
 });
 
 export default connect(null, mapDispatchToProps)(Login);
