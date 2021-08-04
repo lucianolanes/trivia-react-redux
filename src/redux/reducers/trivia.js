@@ -3,6 +3,10 @@ import * as types from '../actions/actionTypes';
 const INITIAL_STATE = {
   score: 0,
   assertions: 0,
+  question: {
+    qnNum: 0,
+    answered: false,
+  },
   questions: [],
   isLoading: false,
   error: {
@@ -12,7 +16,6 @@ const INITIAL_STATE = {
 };
 
 const trivia = (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
   case types.REQUEST_TRIVIA_QUESTIONS:
     return { ...state, isLoading: true };
