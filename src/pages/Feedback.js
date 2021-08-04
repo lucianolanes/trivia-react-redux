@@ -9,7 +9,7 @@ class Feedback extends React.Component {
   }
 
   renderFeedbackMessage() {
-    const { userScore: {score} } = this.props;
+    const { userScore: { score } } = this.props;
     const hit = 3;
     if (score >= hit) {
       return (
@@ -23,6 +23,7 @@ class Feedback extends React.Component {
     return (
       <div>
         <Header />
+        {this.renderFeedbackMessage()}
       </div>
     );
   }
@@ -33,9 +34,8 @@ const mapStateToProps = (state) => ({
 });
 
 Feedback.propTypes = {
-  userInfo: PropTypes.objectOf(PropTypes.string).isRequired,
+  userScore: PropTypes.objectOf(PropTypes.string).isRequired,
 };
-
 
 export default connect(mapStateToProps)(Feedback);
 
