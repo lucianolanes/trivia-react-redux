@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ButtonHome from '../components/ButtonHome';
+import Button from '../components/Button';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
@@ -36,7 +36,10 @@ class Feedback extends React.Component {
           pontos
         </p>
         <div id="buttonHome">
-          <ButtonHome testId="btn-play-again" text="Jogar novamente" />
+          <Button testId="btn-play-again" text="Jogar novamente" linkTo="/" />
+        </div>
+        <div id="buttonRanking">
+          <Button testId="btn-ranking" text="Ver Ranking" linkTo="/ranking" />
         </div>
       </div>
     );
