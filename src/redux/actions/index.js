@@ -14,7 +14,7 @@ const getTriviaQuestions = (questions) => ({
 const getFetchError = (error) => ({ type: types.GET_FETCH_ERROR, error });
 
 // Fetch Token
-export const fetchToken = async (dispatch) => {
+const fetchToken = async (dispatch) => {
   const URL_TOKEN = 'https://opentdb.com/api_token.php?command=request';
   try {
     const response = await fetch(URL_TOKEN);

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
-import { fetchToken, getPlayerInfo } from '../redux/actions';
+import { fetchQuestions, getPlayerInfo } from '../redux/actions';
 import logo from '../trivia.png';
 
 const URL_GRAVATAR = 'https://www.gravatar.com/avatar/';
@@ -15,6 +15,7 @@ class Login extends React.Component {
       name: '',
       email: '',
       disableBtn: true,
+      destiny: null,
     };
     this.btnClickPlay = this.btnClickPlay.bind(this);
     this.btnStats = this.btnStats.bind(this);
@@ -31,14 +32,17 @@ class Login extends React.Component {
     if (disableBtn !== disable) this.setState({ disableBtn: disable });
   }
 
-  btnClickPlay() {
-    const { name, email } = this.state;
-    const { getPlayer, getToken } = this.props;
-    const picture = URL_GRAVATAR + md5(email).toString();
-    const state = JSON.stringify({ name, email });
-    localStorage.setItem('state', `player: ${state}`);
-    getPlayer({ name, email, picture });
-    getToken();
+  btnClickPlay(destiny) {
+    if (destiny === '/trivia') {
+      const { name, email } = this.state;
+      const { getPlayer, getQuestions } = this.props;
+      const picture = URL_GRAVATAR + md5(email).toString();
+      const state = JSON.stringify({ name, email });
+      localStorage.setItem('state', `player: ${state}`);
+      getPlayer({ name, email, picture });
+      getQuestions();
+    }
+    this.setState({ destiny });
   }
 
   createInput(inputProperties) {
@@ -58,19 +62,23 @@ class Login extends React.Component {
   createBtn(inputProperties) {
     const [text, testid, bool, destiny, func] = inputProperties;
     return (
-      <Link to={ destiny }>
-        <button type="button" data-testid={ testid } disabled={ bool } onClick={ func }>
-          { text }
-        </button>
-      </Link>
+      <button
+        type="button"
+        data-testid={ testid }
+        disabled={ bool }
+        onClick={ () => func(destiny) }
+      >
+        { text }
+      </button>
     );
   }
 
   render() {
     const { createInput, handleChange, btnClickPlay } = this;
-    const { name, email, disableBtn } = this.state;
+    const { name, email, disableBtn, destiny } = this.state;
     return (
       <div className="App">
+        { destiny && <Redirect to={ destiny } />}
         <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
           <div className="loginContainer">
@@ -79,7 +87,8 @@ class Login extends React.Component {
             {createInput(['text', 'email', email, 'E-MAIL:', 'input-gravatar-email',
               handleChange])}
             {this.createBtn(['PLAY!!!', 'btn-play', disableBtn, '/trivia', btnClickPlay])}
-            {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false, '/config'])}
+            {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false, '/config',
+              btnClickPlay])}
           </div>
         </header>
       </div>
@@ -88,12 +97,12 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  getToken: PropTypes.func.isRequired,
+  getQuestions: PropTypes.func.isRequired,
   getPlayer: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  getToken: () => dispatch(fetchToken),
+  getQuestions: () => dispatch(fetchQuestions()),
   getPlayer: (info) => dispatch(getPlayerInfo(info)),
 });
 
