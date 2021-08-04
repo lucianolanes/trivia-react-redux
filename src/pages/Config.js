@@ -3,7 +3,7 @@ import React from 'react';
 class Config extends React.Component {
   render() {
     return (
-      <h1>Eu sou o Config</h1>
+      <h1 data-testid="settings-title">Eu sou o Config</h1>
     );
   }
 }
