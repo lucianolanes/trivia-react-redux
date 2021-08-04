@@ -8,6 +8,16 @@
   pointer-events: none;
 }
 
+.loginContainer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(245, 245, 245, 0.13);
+  padding: 40px;
+  border-radius: .3em;
+}
+
 .red-border {
   border: 1px solid red;
 }
