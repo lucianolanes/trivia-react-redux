@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import Header from '../components/Header';
 
@@ -10,6 +11,7 @@ class Feedback extends React.Component {
   }
 
   renderFeedbackMessage() {
+    const { userScore: { score } } = this.props;
     const hit = 3;
     if (score >= hit) {
       return <p data-testid="feedback-text">Mandou bem!</p>;
@@ -49,7 +51,10 @@ const mapStateToProps = (state) => ({
 });
 
 Feedback.propTypes = {
-  userScore: PropTypes.objectOf(PropTypes.string).isRequired,
+  userScore: PropTypes.shape({
+    score: PropTypes.number,
+    assertions: PropTypes.number,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
