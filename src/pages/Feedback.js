@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import ButtonHome from '../components/ButtonHome';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
@@ -9,7 +10,6 @@ class Feedback extends React.Component {
   }
 
   renderFeedbackMessage() {
-
     const hit = 3;
     if (score >= hit) {
       return (
@@ -25,7 +25,19 @@ class Feedback extends React.Component {
       <div>
         <Header />
         {this.renderFeedbackMessage()}
-        <p>Você acertou { assertions } questões!</p>
+        <p data-testeid="feedback-total-question">
+          Você acertou
+          { assertions }
+          questões!
+        </p>
+        <p data-testeid="feedback-total-score">
+          Um total de
+          { score }
+          pontos
+        </p>
+        <div id="buttonHome">
+          <ButtonHome testId="btn-play-again" text="Jogar novamente" />
+        </div>
       </div>
     );
   }
