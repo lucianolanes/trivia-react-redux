@@ -12,7 +12,6 @@ const INITIAL_STATE = {
 };
 
 const trivia = (state = INITIAL_STATE, action) => {
-  console.log(action);
   switch (action.type) {
   case types.REQUEST_TRIVIA_QUESTIONS:
     return { ...state, isLoading: true };
