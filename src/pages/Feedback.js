@@ -9,7 +9,7 @@ class Feedback extends React.Component {
   }
 
   renderFeedbackMessage() {
-    const { userScore: { score } } = this.props;
+
     const hit = 3;
     if (score >= hit) {
       return (
@@ -20,10 +20,12 @@ class Feedback extends React.Component {
   }
 
   render() {
+    const { userScore: { score, assertions } } = this.props;
     return (
       <div>
         <Header />
         {this.renderFeedbackMessage()}
+        <p>Você acertou { assertions } questões!</p>
       </div>
     );
   }
