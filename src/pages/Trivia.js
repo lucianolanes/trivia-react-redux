@@ -6,9 +6,8 @@ import { TriviaHeader, Loading, Question } from '../components';
 class Trivia extends React.Component {
   render() {
     const { questions, question: { qnNum } } = this.props;
-    const LENGTH_FIVE = 5;
 
-    if (questions.length !== LENGTH_FIVE) return <Loading />;
+    if (questions.length === 0) return <Loading />;
     return (
       <section>
         <TriviaHeader />
