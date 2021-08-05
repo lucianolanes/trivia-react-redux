@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import { updateScore } from '../../redux/actions';
+import Cronometer from '../Cronometer';
 import './style.css';
 
 class Question extends React.Component {
@@ -100,14 +101,17 @@ class Question extends React.Component {
   render() {
     const { qnObj: { category, question: text } } = this.props;
     return (
-      <section className="question-container">
-        <h4 data-testid="question-category">{ atob(category) }</h4>
-        <p data-testid="question-text">{ atob(text) }</p>
-        <section className="answers-container">
-          {/* { this.createAnswers() } */}
-          { this.shuffleAnswers() }
+      <>
+        <Cronometer />
+        <section className="question-container">
+          <h4 data-testid="question-category">{ atob(category) }</h4>
+          <p data-testid="question-text">{ atob(text) }</p>
+          <section className="answers-container">
+            {/* { this.createAnswers() } */}
+            { this.shuffleAnswers() }
+          </section>
         </section>
-      </section>
+      </>
     );
   }
 }
