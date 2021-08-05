@@ -11,15 +11,24 @@ class Question extends React.Component {
 
     this.state = {
       // answers: [],
-      randomIndex: null,
+      random: null,
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.setRandom = this.setRandom.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.setAnswers();
-  // }
+  componentDidMount() {
+    this.setRandom();
+    // this.setAnswers();
+  }
+
+  setRandom() {
+    const { qnObj: { incorrect_answers: incorrectAnswers } } = this.props;
+    const { random } = this.state;
+    const ARRAY_LENGTH = incorrectAnswers.length + 1;
+    if (!random) this.setState({ random: Math.floor(Math.random() * ARRAY_LENGTH) });
+  }
 
   // setAnswers() {
   //   this.setState({ answers: this.shuffleAnswers() });
@@ -41,17 +50,13 @@ class Question extends React.Component {
     const {
       qnObj: { correct_answer: correctAnswer,
         incorrect_answers: incorrectAnswers } } = this.props;
-
-    const { randomIndex } = this.state;
-    const ARRAY_LENGTH = incorrectAnswers.length + 1;
-    const random = !randomIndex ? Math.floor(Math.random() * ARRAY_LENGTH) : randomIndex;
+    const { random } = this.state;
     const arrayAnswers = incorrectAnswers
       .map((answer, index) => (
         this.createAnswer([atob(answer), `wrong-answer-${index}`, 'wrong-answer'])));
     const correct = this.createAnswer(
       [atob(correctAnswer), 'correct-answer', 'correct-answer'],
     );
-    if (!randomIndex) this.setState({ randomIndex: random });
     arrayAnswers.splice(random, 0, correct);
     return arrayAnswers;
   }
