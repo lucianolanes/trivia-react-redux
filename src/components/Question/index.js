@@ -4,8 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import { updateScore } from '../../redux/actions';
 import Cronometer from '../Cronometer';
+import NextButton from '../NextButton';
 import './style.css';
 
+// prettier-ignore
 class Question extends React.Component {
   constructor(props) {
     super(props);
@@ -88,18 +90,19 @@ class Question extends React.Component {
   }
 
   handleClick() {
-    const { updateScore: update } = this.props;
+    const { updateScore: update, question: { qnNum } } = this.props;
     const payload = {
       score: 0,
       assertions: 0,
-      question: { qnNum: 0, answered: true },
+      question: { qnNum, answered: true },
     };
     update(payload);
   }
 
   /** Source: https://forums.pixeltailgames.com/t/encoding-issues-in-questions-answers/34751/2 */
   render() {
-    const { qnObj: { category, question: text } } = this.props;
+    const { qnObj: { category, question: text },
+      question: { answered, qnNum } } = this.props;
     return (
       <>
         <Cronometer />
@@ -111,6 +114,7 @@ class Question extends React.Component {
             { this.shuffleAnswers() }
           </section>
         </section>
+        { answered && <NextButton qnNum={ qnNum } /> }
       </>
     );
   }
@@ -118,13 +122,14 @@ class Question extends React.Component {
 
 const mapStateToProps = (state) => ({ ...state.trivia });
 
-const mapDispatchToProps = ({ updateScore });
+const mapDispatchToProps = { updateScore };
 
 Question.propTypes = {
   qnObj: PropTypes.shape({
     category: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
-    incorrect_answers: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    incorrect_answers: PropTypes.arrayOf(PropTypes.string.isRequired)
+      .isRequired,
     correct_answer: PropTypes.string.isRequired,
   }).isRequired,
   question: PropTypes.shape({
