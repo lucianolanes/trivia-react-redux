@@ -16,7 +16,7 @@ class TriviaHeader extends React.Component {
         />
         <p className="player-name">
           Player:
-          <span>{name}</span>
+          <span data-testid="header-player-name">{name}</span>
         </p>
         <p className="player-score">
           Score:

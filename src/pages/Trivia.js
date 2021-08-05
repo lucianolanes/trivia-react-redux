@@ -5,8 +5,10 @@ import { TriviaHeader, Loading, Question } from '../components';
 
 class Trivia extends React.Component {
   render() {
-    const { questions, question: { qnNum }, isLoading } = this.props;
-    if (!isLoading) return <Loading />;
+    const { questions, question: { qnNum } } = this.props;
+    const LENGTH_FIVE = 5;
+
+    if (questions.length !== LENGTH_FIVE) return <Loading />;
     return (
       <section>
         <TriviaHeader />
@@ -23,7 +25,6 @@ Trivia.propTypes = {
   question: PropTypes.shape({
     qnNum: PropTypes.number.isRequired,
   }).isRequired,
-  isLoading: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, null)(Trivia);

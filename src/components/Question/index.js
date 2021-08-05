@@ -24,28 +24,16 @@ class Question extends React.Component {
     this.setState({ answers: this.shuffleAnswers() });
   }
 
-  /** Source: https://bost.ocks.org/mike/shuffle/ */
-  shuffle(array) {
-    let m = array.length;
-    let t;
-    let i;
-    // While there remain elements to shuffle…
-    while (m) {
-      // Pick a remaining element…
-      m -= 1;
-      i = Math.floor(Math.random() * m);
-      // And swap it with the current element.
-      t = array[m];
-      array[m] = array[i];
-      array[i] = t;
-    }
-    return array;
-  }
-
+  /** Source: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice */
   shuffleAnswers() {
     const {
-      qnObj: { correct_answer: correct, incorrect_answers: incorrect } } = this.props;
-    return this.shuffle([correct, ...incorrect]);
+      qnObj: { correct_answer: correctAnswer,
+        incorrect_answers: incorrectAnswers } } = this.props;
+    const ARRAY_LENGTH = incorrectAnswers.length + 1;
+    const random = Math.floor(Math.random() * ARRAY_LENGTH);
+    const arrayAnswers = [...incorrectAnswers];
+    arrayAnswers.splice(random, 0, correctAnswer);
+    return arrayAnswers;
   }
 
   createAnswers() {
@@ -82,7 +70,7 @@ class Question extends React.Component {
         data-testid={ `wrong-answer-${index}` }
         onClick={ this.handleClick }
       >
-        { answer }
+        { atob(answer) }
       </button>
     );
   }
@@ -97,17 +85,18 @@ class Question extends React.Component {
         data-testid="correct-answer"
         onClick={ this.handleClick }
       >
-        { answer }
+        { atob(answer) }
       </button>
     );
   }
 
+  /** Source: https://forums.pixeltailgames.com/t/encoding-issues-in-questions-answers/34751/2 */
   render() {
     const { qnObj: { category, question: text } } = this.props;
     return (
       <section className="question-container">
-        <h4 data-testid="question-category">{ category }</h4>
-        <p data-testid="question-text">{ text }</p>
+        <h4 data-testid="question-category">{ atob(category) }</h4>
+        <p data-testid="question-text">{ atob(text) }</p>
         <section className="answers-container">
           { this.createAnswers() }
         </section>

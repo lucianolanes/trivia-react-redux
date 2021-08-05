@@ -37,7 +37,7 @@ export const fetchQuestions = () => async (dispatch) => {
   };
   dispatch(requestTriviaQuestions());
   const token = await fetchToken(dispatch);
-  const URL_QUESTIONS = `https://opentdb.com/api.php?amount=5&token=${token}`;
+  const URL_QUESTIONS = `https://opentdb.com/api.php?amount=5&encode=base64&token=${token}`;
   try {
     const response = await fetch(URL_QUESTIONS);
     const { response_code: responseCode, results } = await response.json();
