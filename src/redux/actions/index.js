@@ -49,3 +49,9 @@ export const fetchQuestions = () => async (dispatch) => {
 
 // Atualiza a pontuação
 export const updateScore = (payload) => ({ type: types.UPDATE_SCORE, payload });
+
+// Atualiza a questão
+export const updateQuestion = (payload) => ({ type: types.UPDATE_QUESTION, payload });
+
+// Atualiza o tempo de resposta
+export const setAnswerTime = (payload) => ({ type: types.SET_ANSWER_TIME, payload });

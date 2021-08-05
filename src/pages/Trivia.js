@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { TriviaHeader, Loading, Question } from '../components';
 
-// prettier-ignore
 class Trivia extends React.Component {
   render() {
     const { questions, question: { qnNum } } = this.props;

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateScore } from '../redux/actions';
+import { updateQuestion } from '../redux/actions';
 
-// prettier-ignore
 class NextButton extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +11,7 @@ class NextButton extends React.Component {
   }
 
   handleClick() {
-    const { qnNum, updateScore: update } = this.props;
+    const { qnNum, updateQuestion: update } = this.props;
     const newQnNum = qnNum + 1;
     update({ question: { answered: false, qnNum: newQnNum } });
   }
@@ -26,11 +25,11 @@ class NextButton extends React.Component {
   }
 }
 
-const mapDispatchToProps = { updateScore };
+const mapDispatchToProps = { updateQuestion };
 
 NextButton.propTypes = {
   qnNum: PropTypes.number.isRequired,
-  updateScore: PropTypes.func.isRequired,
+  updateQuestion: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(NextButton);

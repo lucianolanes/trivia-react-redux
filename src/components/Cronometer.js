@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateScore } from '../redux/actions';
+import { updateQuestion, setAnswerTime } from '../redux/actions';
 
-// prettier-ignore
 class Cronometer extends React.Component {
   constructor() {
     super();
@@ -27,8 +26,11 @@ class Cronometer extends React.Component {
   }
 
   componentDidUpdate(_prevProps, { timer, timerID }) {
-    const { question: { answered } } = this.props;
-    if (answered) clearInterval(timerID);
+    const { question: { answered }, setAnswerTime: setTime } = this.props;
+    if (answered) {
+      clearInterval(timerID);
+      setTime({ answerTime: timer });
+    }
     if (timer === 0) {
       clearInterval(timerID);
       this.updateAfterTimeOut();
@@ -40,7 +42,7 @@ class Cronometer extends React.Component {
   }
 
   updateAfterTimeOut() {
-    const { updateScore: update, question: { qnNum } } = this.props;
+    const { updateQuestion: update, question: { qnNum } } = this.props;
     update({ question: { answered: true, qnNum } });
   }
 
@@ -55,7 +57,7 @@ class Cronometer extends React.Component {
   }
 }
 
-const mapDispatchToProps = { updateScore };
+const mapDispatchToProps = { updateQuestion, setAnswerTime };
 
 const mapStateToProps = (state) => ({ ...state.trivia });
 
@@ -64,7 +66,8 @@ Cronometer.propTypes = {
     answered: PropTypes.bool.isRequired,
     qnNum: PropTypes.number.isRequired,
   }).isRequired,
-  updateScore: PropTypes.func.isRequired,
+  updateQuestion: PropTypes.func.isRequired,
+  setAnswerTime: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cronometer);
