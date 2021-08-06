@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { TriviaHeader, Loading, Question } from '../components';
 
 class Trivia extends React.Component {
@@ -8,10 +9,12 @@ class Trivia extends React.Component {
     const { questions, question: { qnNum } } = this.props;
 
     if (questions.length === 0) return <Loading />;
+    if (qnNum >= questions.length) return <Redirect to="/feedback" />;
     return (
       <section>
         <TriviaHeader />
-        <Question qnObj={ questions[qnNum] } />
+        {/* Source: https://www.nikgraf.com/blog/using-reacts-key-attribute-to-remount-a-component */}
+        <Question key={ qnNum } qnObj={ questions[qnNum] } />
       </section>
     );
   }

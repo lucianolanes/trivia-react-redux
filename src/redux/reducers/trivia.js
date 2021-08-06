@@ -13,6 +13,7 @@ const INITIAL_STATE = {
     message: '',
     redirect: false,
   },
+  answerTime: 30,
 };
 
 const trivia = (state = INITIAL_STATE, action) => {
@@ -28,6 +29,10 @@ const trivia = (state = INITIAL_STATE, action) => {
       isLoading: false,
     };
   case types.UPDATE_SCORE:
+    return { ...state, ...action.payload };
+  case types.UPDATE_QUESTION:
+    return { ...state, ...action.payload };
+  case types.SET_ANSWER_TIME:
     return { ...state, ...action.payload };
   default:
     return state;

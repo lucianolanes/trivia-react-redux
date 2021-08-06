@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
-import { updateScore } from '../../redux/actions';
+import { updateScore, updateQuestion } from '../../redux/actions';
+import Cronometer from '../Cronometer';
+import NextButton from '../NextButton';
 import './style.css';
+
+const correctText = 'correct-answer';
 
 class Question extends React.Component {
   constructor(props) {
@@ -37,7 +41,7 @@ class Question extends React.Component {
       .map((answer, index) => (
         this.createAnswer([atob(answer), `wrong-answer-${index}`, 'wrong-answer'])));
     const correct = this.createAnswer(
-      [atob(correctAnswer), 'correct-answer', 'correct-answer'],
+      [atob(correctAnswer), correctText, correctText],
     );
     arrayAnswers.splice(random, 0, correct);
     return arrayAnswers;
@@ -50,6 +54,7 @@ class Question extends React.Component {
         key={ uuidv4() }
         type="button"
         data-testid={ testid }
+        id={ testid }
         className={ answered ? className : '' }
         disabled={ answered }
         onClick={ this.handleClick }
@@ -59,47 +64,69 @@ class Question extends React.Component {
     );
   }
 
-  handleClick() {
-    const { updateScore: update } = this.props;
-    const payload = {
-      score: 0,
-      assertions: 0,
-      question: { qnNum: 0, answered: true },
-    };
+  handleClick({ target: { id } }) {
+    const { updateQuestion: update,
+      question: { qnNum }, updateScore: addPoints, score: prevScore } = this.props;
+    const payload = { question: { qnNum, answered: true } };
     update(payload);
+    if (id === correctText) {
+      addPoints({ score: prevScore + this.pointsCalculator() });
+    }
+  }
+
+  pointsCalculator() {
+    const { qnObj: { difficulty }, answerTime } = this.props;
+    const diffConvertion = {
+      hard: 3,
+      medium: 2,
+      easy: 1,
+    };
+    const TEN = 10;
+    const score = TEN + (answerTime * diffConvertion[atob(difficulty)]);
+    return score;
   }
 
   /** Source: https://forums.pixeltailgames.com/t/encoding-issues-in-questions-answers/34751/2 */
   render() {
-    const { qnObj: { category, question: text } } = this.props;
+    const { qnObj: { category, question: text },
+      question: { answered, qnNum } } = this.props;
     return (
-      <section className="question-container">
-        <h4 data-testid="question-category">{ atob(category) }</h4>
-        <p data-testid="question-text">{ atob(text) }</p>
-        <section className="answers-container">
-          { this.shuffleAnswers() }
+      <>
+        <Cronometer callback={ this.pointsCalculator } />
+        <section className="question-container">
+          <h4 data-testid="question-category">{ atob(category) }</h4>
+          <p data-testid="question-text">{ atob(text) }</p>
+          <section className="answers-container">
+            { this.shuffleAnswers() }
+          </section>
         </section>
-      </section>
+        { answered && <NextButton qnNum={ qnNum } /> }
+      </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({ ...state.trivia });
 
-const mapDispatchToProps = ({ updateScore });
+const mapDispatchToProps = { updateScore, updateQuestion };
 
 Question.propTypes = {
   qnObj: PropTypes.shape({
     category: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
-    incorrect_answers: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    difficulty: PropTypes.string.isRequired,
+    incorrect_answers: PropTypes.arrayOf(PropTypes.string.isRequired)
+      .isRequired,
     correct_answer: PropTypes.string.isRequired,
   }).isRequired,
   question: PropTypes.shape({
     qnNum: PropTypes.number.isRequired,
     answered: PropTypes.bool.isRequired,
   }).isRequired,
+  answerTime: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
   updateScore: PropTypes.func.isRequired,
+  updateQuestion: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
