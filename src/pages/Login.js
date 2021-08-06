@@ -66,6 +66,7 @@ class Login extends React.Component {
       <button
         type="button"
         data-testid={ testid }
+        className={ testid }
         disabled={ bool }
         onClick={ () => func(destiny) }
       >
@@ -87,7 +88,7 @@ class Login extends React.Component {
               handleChange])}
             {createInput(['text', 'email', email, 'E-MAIL:', 'input-gravatar-email',
               handleChange])}
-            {this.createBtn(['PLAY!!!', 'btn-play', disableBtn, '/trivia', btnClick])}
+            {this.createBtn(['PLAY', 'btn-play', disableBtn, '/trivia', btnClick])}
             {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false, '/config',
               btnClick])}
           </div>

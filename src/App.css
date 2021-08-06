@@ -64,3 +64,21 @@
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.btn-play, .btn-settings {
+  border: 4px solid rgb(137,41,125);
+  color: rgb(137,41,125);
+  font-weight: 800;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.812);
+  border-radius: 20px;
+  font-size: 20px;
+  padding: 5px;
+  min-width: 10%;
+  margin-top: 5px;
+}
+
+.btn-play:disabled {
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: all 1s;
+}
