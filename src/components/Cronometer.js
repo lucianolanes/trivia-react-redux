@@ -9,7 +9,7 @@ class Cronometer extends React.Component {
   constructor() {
     super();
     this.state = {
-      timer: 30,
+      timer: THIRTY_SEC,
       timerID: null,
     };
 
@@ -30,14 +30,8 @@ class Cronometer extends React.Component {
   componentDidUpdate(_prevProps, { timer, timerID }) {
     const { question: { answered }, setAnswerTime: setTime } = this.props;
     setTime({ answerTime: (timer === THIRTY_SEC) ? THIRTY_SEC : (timer - 1) });
-    if (answered) {
-      clearInterval(timerID);
-      return;
-    }
-    if (timer === 0) {
-      clearInterval(timerID);
-      this.updateAfterTimeOut();
-    }
+    if (answered) { clearInterval(timerID); return; }
+    if (timer === 0) { this.updateAfterTimeOut(); }
   }
 
   setTimerID(timerID) {
