@@ -58,7 +58,6 @@ class Ranking extends React.Component {
   }
 
   render() {
-    // [ { name: nome-da-pessoa, score: 10, picture: url-da-foto-no-gravatar } ]
     const { redirect } = this.state;
 
     return (

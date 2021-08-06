@@ -6,17 +6,6 @@ import TriviaHeader from '../components/TriviaHeader';
 import { updateQuestion, getTriviaQuestions } from '../redux/actions';
 
 class Feedback extends React.Component {
-  // constructor() {
-  //   super();
-
-  //   // this.state = {
-  //   //   score: 0,
-  //   //   assertions: 0,
-  //   // };
-
-  //   this.renderFeedbackMessage = this.renderFeedbackMessage.bind(this);
-  // }
-
   componentDidMount() {
     const { updateQuestion: setQuestion } = this.props;
     setQuestion({ question: { qnNum: 0, answered: false } });
@@ -28,10 +17,8 @@ class Feedback extends React.Component {
   }
 
   setScoreAndAssertions() {
-    // const { player: { score, assertions } } = JSON.parse(localStorage.getItem('state'));
     const { getTriviaQuestions: resetQuestions } = this.props;
     resetQuestions([]);
-    // this.setState({ score, assertions });
   }
 
   renderFeedbackMessage() {
@@ -44,7 +31,6 @@ class Feedback extends React.Component {
   }
 
   render() {
-    // const { score, assertions } = this.state;
     const { player: { score, assertions } } = JSON.parse(localStorage.getItem('state'));
     return (
       <div>
