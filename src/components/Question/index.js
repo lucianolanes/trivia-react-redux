@@ -10,7 +10,6 @@ class Question extends React.Component {
     super(props);
 
     this.state = {
-      // answers: [],
       random: null,
     };
 
@@ -20,7 +19,6 @@ class Question extends React.Component {
 
   componentDidMount() {
     this.setRandom();
-    // this.setAnswers();
   }
 
   setRandom() {
@@ -29,22 +27,6 @@ class Question extends React.Component {
     const ARRAY_LENGTH = incorrectAnswers.length + 1;
     if (!random) this.setState({ random: Math.floor(Math.random() * ARRAY_LENGTH) });
   }
-
-  // setAnswers() {
-  //   this.setState({ answers: this.shuffleAnswers() });
-  // }
-
-  /** Source: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice */
-  // shuffleAnswers() {
-  //   const {
-  //     qnObj: { correct_answer: correctAnswer,
-  //       incorrect_answers: incorrectAnswers } } = this.props;
-  //   const ARRAY_LENGTH = incorrectAnswers.length + 1;
-  //   const random = Math.floor(Math.random() * ARRAY_LENGTH);
-  //   const arrayAnswers = [...incorrectAnswers];
-  //   arrayAnswers.splice(random, 0, correctAnswer);
-  //   return arrayAnswers;
-  // }
 
   shuffleAnswers() {
     const {
@@ -60,20 +42,6 @@ class Question extends React.Component {
     arrayAnswers.splice(random, 0, correct);
     return arrayAnswers;
   }
-
-  // createAnswers() {
-  //   const { qnObj: { correct_answer: correct } } = this.props;
-  //   const { answers } = this.state;
-  //   let index = 0;
-  //   const result = answers.map((answer) => {
-  //     if (answer === correct) {
-  //       return this.createAnswer([atob(correct), 'correct-answer', 'correct-answer']);
-  //     }
-  //     index += 1;
-  //     return this.createAnswer([atob(answer), `wrong-answer-${index}`, 'wrong-answer']);
-  //   });
-  //   return result;
-  // }
 
   createAnswer([answer, testid, className]) {
     const { question: { answered } } = this.props;
@@ -109,7 +77,6 @@ class Question extends React.Component {
         <h4 data-testid="question-category">{ atob(category) }</h4>
         <p data-testid="question-text">{ atob(text) }</p>
         <section className="answers-container">
-          {/* { this.createAnswers() } */}
           { this.shuffleAnswers() }
         </section>
       </section>
