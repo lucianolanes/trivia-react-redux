@@ -14,65 +14,38 @@ class Question extends React.Component {
     super(props);
 
     this.state = {
-      // answers: [],
-      randomIndex: null,
+      random: null,
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.setRandom = this.setRandom.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.setAnswers();
-  // }
+  componentDidMount() {
+    this.setRandom();
+  }
 
-  // setAnswers() {
-  //   this.setState({ answers: this.shuffleAnswers() });
-  // }
-
-  /** Source: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice */
-  // shuffleAnswers() {
-  //   const {
-  //     qnObj: { correct_answer: correctAnswer,
-  //       incorrect_answers: incorrectAnswers } } = this.props;
-  //   const ARRAY_LENGTH = incorrectAnswers.length + 1;
-  //   const random = Math.floor(Math.random() * ARRAY_LENGTH);
-  //   const arrayAnswers = [...incorrectAnswers];
-  //   arrayAnswers.splice(random, 0, correctAnswer);
-  //   return arrayAnswers;
-  // }
+  setRandom() {
+    const { qnObj: { incorrect_answers: incorrectAnswers } } = this.props;
+    const { random } = this.state;
+    const ARRAY_LENGTH = incorrectAnswers.length + 1;
+    if (!random) this.setState({ random: Math.floor(Math.random() * ARRAY_LENGTH) });
+  }
 
   shuffleAnswers() {
     const {
       qnObj: { correct_answer: correctAnswer,
         incorrect_answers: incorrectAnswers } } = this.props;
-
-    const { randomIndex } = this.state;
-    const ARRAY_LENGTH = incorrectAnswers.length + 1;
-    const random = !randomIndex ? Math.floor(Math.random() * ARRAY_LENGTH) : randomIndex;
+    const { random } = this.state;
     const arrayAnswers = incorrectAnswers
       .map((answer, index) => (
         this.createAnswer([atob(answer), `wrong-answer-${index}`, 'wrong-answer'])));
     const correct = this.createAnswer(
       [atob(correctAnswer), correctText, correctText],
     );
-    if (!randomIndex) this.setState({ randomIndex: random });
     arrayAnswers.splice(random, 0, correct);
     return arrayAnswers;
   }
-
-  // createAnswers() {
-  //   const { qnObj: { correct_answer: correct } } = this.props;
-  //   const { answers } = this.state;
-  //   let index = 0;
-  //   const result = answers.map((answer) => {
-  //     if (answer === correct) {
-  //       return this.createAnswer([atob(correct), correctText, correctText]);
-  //     }
-  //     index += 1;
-  //     return this.createAnswer([atob(answer), `wrong-answer-${index}`, 'wrong-answer']);
-  //   });
-  //   return result;
-  // }
 
   createAnswer([answer, testid, className]) {
     const { question: { answered } } = this.props;
@@ -124,7 +97,6 @@ class Question extends React.Component {
           <h4 data-testid="question-category">{ atob(category) }</h4>
           <p data-testid="question-text">{ atob(text) }</p>
           <section className="answers-container">
-            {/* { this.createAnswers() } */}
             { this.shuffleAnswers() }
           </section>
         </section>
