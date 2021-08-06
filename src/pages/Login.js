@@ -17,7 +17,7 @@ class Login extends React.Component {
       disableBtn: true,
       destiny: null,
     };
-    this.btnClickPlay = this.btnClickPlay.bind(this);
+    this.btnClick = this.btnClick.bind(this);
     this.btnStats = this.btnStats.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -32,7 +32,7 @@ class Login extends React.Component {
     if (disableBtn !== disable) this.setState({ disableBtn: disable });
   }
 
-  btnClickPlay(destiny) {
+  btnClick(destiny) {
     if (destiny === '/trivia') {
       const { name, email } = this.state;
       const { getPlayer, getQuestions } = this.props;
@@ -74,7 +74,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { createInput, handleChange, btnClickPlay } = this;
+    const { createInput, handleChange, btnClick } = this;
     const { name, email, disableBtn, destiny } = this.state;
     return (
       <div className="App">
@@ -86,9 +86,9 @@ class Login extends React.Component {
               handleChange])}
             {createInput(['text', 'email', email, 'E-MAIL:', 'input-gravatar-email',
               handleChange])}
-            {this.createBtn(['PLAY!!!', 'btn-play', disableBtn, '/trivia', btnClickPlay])}
+            {this.createBtn(['PLAY!!!', 'btn-play', disableBtn, '/trivia', btnClick])}
             {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false, '/config',
-              btnClickPlay])}
+              btnClick])}
           </div>
         </header>
       </div>
