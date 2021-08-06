@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQuestion, setAnswerTime } from '../redux/actions';
 
+const THIRTY_SEC = 30;
+
 class Cronometer extends React.Component {
   constructor() {
     super();
@@ -27,9 +29,10 @@ class Cronometer extends React.Component {
 
   componentDidUpdate(_prevProps, { timer, timerID }) {
     const { question: { answered }, setAnswerTime: setTime } = this.props;
+    setTime({ answerTime: (timer === THIRTY_SEC) ? THIRTY_SEC : (timer - 1) });
     if (answered) {
       clearInterval(timerID);
-      setTime({ answerTime: timer });
+      return;
     }
     if (timer === 0) {
       clearInterval(timerID);
@@ -48,10 +51,9 @@ class Cronometer extends React.Component {
 
   render() {
     const { timer } = this.state;
-    const NEGATIVE_VALUE = -1;
     return (
       <div>
-        { timer === NEGATIVE_VALUE ? 0 : timer }
+        { timer }
       </div>
     );
   }
