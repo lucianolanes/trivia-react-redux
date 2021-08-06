@@ -9,8 +9,8 @@
 }
 
 .loginContainer {
-  background-color: rgba(245, 245, 245, 0.13);
-  border-radius: 0.3em;
+  background-color: rgba(0, 0, 0, 0.91);
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -35,7 +35,6 @@
 
 .App-header {
   align-items: center;
-  background-color: #282c34;
   color: white;
   display: flex;
   flex-direction: column;

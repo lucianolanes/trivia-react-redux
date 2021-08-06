@@ -1,8 +1,18 @@
-.loading {
+.loadingContainer {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin-top: 35vh;
+}
+
+.loading {
   display: flex;
   font-size: 40px;
-  margin-top: 48vh;
   color: white;
-  justify-content: center;
+}
+
+.loadingGif {
+  margin-top: -10px;
+  height: 70px;
 }
