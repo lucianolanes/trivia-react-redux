@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import { fetchQuestions, getPlayerInfo } from '../redux/actions';
-import logo from '../trivia.png';
+import logo from '../img/trivia.png';
 
 const URL_GRAVATAR = 'https://www.gravatar.com/avatar/';
 
