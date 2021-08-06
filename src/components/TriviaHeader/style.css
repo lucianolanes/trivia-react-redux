@@ -1,0 +1,33 @@
+.header-trivia {
+  align-items: center;
+  background-color: lightgrey;
+  border: 5px double darkgrey;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
+  padding: 10px;
+}
+
+.profile-picture {
+  border-radius: 50%;
+}
+
+.player-name {
+  color: gray;
+  font-size: 30px;
+}
+
+.player-name span {
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.player-score {
+  color: gray;
+  font-size: 20px;
+}
+
+.player-score span {
+  font-weight: 700;
+  margin-left: 5px;
+}

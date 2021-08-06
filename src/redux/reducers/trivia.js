@@ -3,6 +3,10 @@ import * as types from '../actions/actionTypes';
 const INITIAL_STATE = {
   score: 0,
   assertions: 0,
+  question: {
+    qnNum: 0,
+    answered: false,
+  },
   questions: [],
   isLoading: false,
   error: {
