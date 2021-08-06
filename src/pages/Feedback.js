@@ -3,36 +3,47 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../components/Button';
 import TriviaHeader from '../components/TriviaHeader';
+import { updateQuestion, getTriviaQuestions } from '../redux/actions';
 
 class Feedback extends React.Component {
-  constructor() {
-    super();
-    this.renderFeedbackMessage = this.renderFeedbackMessage.bind(this);
+  componentDidMount() {
+    const { updateQuestion: setQuestion } = this.props;
+    setQuestion({ question: { qnNum: 0, answered: false } });
+    this.setScoreAndAssertions();
+  }
+
+  componentWillUnmount() {
+    localStorage.removeItem('state');
+  }
+
+  setScoreAndAssertions() {
+    const { getTriviaQuestions: resetQuestions } = this.props;
+    resetQuestions([]);
   }
 
   renderFeedbackMessage() {
-    const { userScore: { assertions } } = this.props;
+    const { player: { assertions } } = JSON.parse(localStorage.getItem('state'));
     const hit = 3;
     if (assertions >= hit) {
       return <p data-testid="feedback-text">Mandou bem!</p>;
     }
-    return <p data-testid="feedback-text">Poderia ser melhor...</p>;
+    return <p data-testid="feedback-text">Podia ser melhor...</p>;
   }
 
   render() {
-    const { userScore: { score, assertions } } = this.props;
+    const { player: { score, assertions } } = JSON.parse(localStorage.getItem('state'));
     return (
       <div>
         <TriviaHeader />
         {this.renderFeedbackMessage()}
-        <p data-testeid="feedback-total-question">
+        <p>
           Você acertou
-          { assertions }
+          <span data-testid="feedback-total-question">{ assertions }</span>
           questões!
         </p>
-        <p data-testeid="feedback-total-score">
+        <p>
           Um total de
-          { score }
+          <span data-testid="feedback-total-score">{ score }</span>
           pontos
         </p>
         <div id="buttonHome">
@@ -47,14 +58,18 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userScore: state.trivia,
+  user: state.user,
 });
 
+const mapDispatchToProps = ({ updateQuestion, getTriviaQuestions });
+
 Feedback.propTypes = {
-  userScore: PropTypes.shape({
-    score: PropTypes.number,
-    assertions: PropTypes.number,
+  updateQuestion: PropTypes.func.isRequired,
+  getTriviaQuestions: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

@@ -37,8 +37,9 @@ class Login extends React.Component {
       const { name, email } = this.state;
       const { getPlayer, getQuestions } = this.props;
       const picture = URL_GRAVATAR + md5(email).toString();
-      const state = JSON.stringify({ name, email });
-      localStorage.setItem('state', `player: ${state}`);
+      const state = JSON.stringify({
+        player: { name, assertions: 0, score: 0, gravatarEmail: email } });
+      localStorage.setItem('state', state);
       getPlayer({ name, email, picture });
       getQuestions();
     }

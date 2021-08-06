@@ -66,16 +66,24 @@ class Question extends React.Component {
 
   handleClick({ target: { id } }) {
     const { updateQuestion: update,
-      question: { qnNum }, updateScore: addPoints, score: prevScore } = this.props;
+      question: { qnNum }, updateScore: addPoints } = this.props;
     const payload = { question: { qnNum, answered: true } };
     update(payload);
     if (id === correctText) {
-      addPoints({ score: prevScore + this.pointsCalculator() });
+      const state = JSON.parse(localStorage.getItem('state'));
+      const { player: { score, assertions } } = state;
+      const { answerTime } = this.props;
+      const newScore = score + this.pointsCalculator(answerTime);
+      const newAssertions = assertions + 1;
+      addPoints({ score: newScore, assertions: newAssertions });
+      const newState = {
+        player: { ...state.player, score: newScore, assertions: newAssertions } };
+      localStorage.setItem('state', JSON.stringify(newState));
     }
   }
 
-  pointsCalculator() {
-    const { qnObj: { difficulty }, answerTime } = this.props;
+  pointsCalculator(answerTime) {
+    const { qnObj: { difficulty } } = this.props;
     const diffConvertion = {
       hard: 3,
       medium: 2,
@@ -124,7 +132,6 @@ Question.propTypes = {
     answered: PropTypes.bool.isRequired,
   }).isRequired,
   answerTime: PropTypes.number.isRequired,
-  score: PropTypes.number.isRequired,
   updateScore: PropTypes.func.isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };

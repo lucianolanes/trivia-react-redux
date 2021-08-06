@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 class ButtonHome extends React.Component {
   render() {
-    const { text, testId } = this.props;
+    const { text, testId, linkTo } = this.props;
     return (
-      <Link to="/">
-        <button type="button" data-testId={ testId }>
+      <Link to={ linkTo }>
+        <button type="button" data-testid={ testId }>
           { text }
         </button>
       </Link>
@@ -18,6 +18,7 @@ class ButtonHome extends React.Component {
 ButtonHome.propTypes = {
   text: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
+  linkTo: PropTypes.string.isRequired,
 };
 
 export default ButtonHome;

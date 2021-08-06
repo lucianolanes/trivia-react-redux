@@ -6,7 +6,7 @@ export const getPlayerInfo = (info) => ({ type: types.GET_PLAYER_INFO, info });
 // Bloco de funções auxiliares para os fetch's
 const requestTriviaQuestions = () => ({ type: types.REQUEST_TRIVIA_QUESTIONS });
 
-const getTriviaQuestions = (questions) => ({
+export const getTriviaQuestions = (questions) => ({
   type: types.GET_TRIVIA_QUESTIONS,
   questions,
 });

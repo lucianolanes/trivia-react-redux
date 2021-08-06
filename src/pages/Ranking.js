@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { updateScore } from '../redux/actions';
 
 class Ranking extends React.Component {
   constructor() {
@@ -17,16 +20,20 @@ class Ranking extends React.Component {
     this.makeRank();
   }
 
+  componentWillUnmount() {
+    const { updateScore: update } = this.props;
+    update({ score: 0, assertions: 0 });
+  }
+
   returnClick() { this.setState({ redirect: true }); }
 
   makeRank() {
-    const player = localStorage.getItem('state')
-      ? JSON.parse((localStorage.getItem('state')).split(': ')[1]) : null;
+    const { user: { name, picture }, trivia: { score } } = this.props;
     let rankList = localStorage.getItem('ranking')
       ? JSON.parse(localStorage.getItem('ranking')) : [];
-    rankList = (player) ? [...rankList, player]
-      .sort(({ score: scA }, { score: scB }) => scB - scA) : rankList;
-    localStorage.removeItem('state');
+    const newPlayer = { name, score, picture };
+    rankList = [...rankList, newPlayer]
+      .sort(({ score: scA }, { score: scB }) => scB - scA);
     this.setState({ ranking: rankList });
     localStorage.setItem('ranking', JSON.stringify(rankList));
   }
@@ -51,7 +58,6 @@ class Ranking extends React.Component {
   }
 
   render() {
-    // [ { name: nome-da-pessoa, score: 10, picture: url-da-foto-no-gravatar } ]
     const { redirect } = this.state;
 
     return (
@@ -61,10 +67,34 @@ class Ranking extends React.Component {
         <div>
           { this.renderRank() }
         </div>
-        <button type="button" onClick={ this.returnClick }>MAIS UMA VEZ!!!</button>
+        <button
+          type="button"
+          data-testid="btn-go-home"
+          onClick={ this.returnClick }
+        >
+          MAIS UMA VEZ!!!
+        </button>
       </>
     );
   }
 }
 
-export default Ranking;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  trivia: state.trivia,
+});
+
+const mapDispatchToProps = ({ updateScore });
+
+Ranking.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+  }).isRequired,
+  trivia: PropTypes.shape({
+    score: PropTypes.number.isRequired,
+  }).isRequired,
+  updateScore: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Ranking);
