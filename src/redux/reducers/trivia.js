@@ -3,12 +3,17 @@ import * as types from '../actions/actionTypes';
 const INITIAL_STATE = {
   score: 0,
   assertions: 0,
+  question: {
+    qnNum: 0,
+    answered: false,
+  },
   questions: [],
   isLoading: false,
   error: {
     message: '',
     redirect: false,
   },
+  answerTime: 30,
 };
 
 const trivia = (state = INITIAL_STATE, action) => {
@@ -24,6 +29,10 @@ const trivia = (state = INITIAL_STATE, action) => {
       isLoading: false,
     };
   case types.UPDATE_SCORE:
+    return { ...state, ...action.payload };
+  case types.UPDATE_QUESTION:
+    return { ...state, ...action.payload };
+  case types.SET_ANSWER_TIME:
     return { ...state, ...action.payload };
   default:
     return state;

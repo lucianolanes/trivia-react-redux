@@ -57,6 +57,7 @@ class Ranking extends React.Component {
     return (
       <>
         { redirect && <Redirect to="/" /> }
+        <h1 data-testid="ranking-title">Ranking</h1>
         <div>
           { this.renderRank() }
         </div>
