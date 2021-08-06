@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../components/Button';
-import Header from '../components/Header';
+import TriviaHeader from '../components/TriviaHeader';
 
 class Feedback extends React.Component {
   constructor() {
@@ -11,9 +11,9 @@ class Feedback extends React.Component {
   }
 
   renderFeedbackMessage() {
-    const { userScore: { score } } = this.props;
+    const { userScore: { assertions } } = this.props;
     const hit = 3;
-    if (score >= hit) {
+    if (assertions >= hit) {
       return <p data-testid="feedback-text">Mandou bem!</p>;
     }
     return <p data-testid="feedback-text">Poderia ser melhor...</p>;
@@ -23,7 +23,7 @@ class Feedback extends React.Component {
     const { userScore: { score, assertions } } = this.props;
     return (
       <div>
-        <Header />
+        <TriviaHeader />
         {this.renderFeedbackMessage()}
         <p data-testeid="feedback-total-question">
           Você acertou
@@ -47,7 +47,7 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userScore: state.rootReducer.score,
+  userScore: state.trivia,
 });
 
 Feedback.propTypes = {
