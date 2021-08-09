@@ -3,13 +3,14 @@
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 23vmin;
   margin-top: 20vmin;
+  margin-bottom: 20px;
   pointer-events: none;
 }
 
 .loginContainer {
-  background-color: rgba(0, 0, 0, 0.91);
+  background-color: rgba(0, 0, 0, 0.82);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -30,6 +31,10 @@
 
   .App-logo {
     animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  .loadingGif {
+    animation: shake infinite 1.75s cubic-bezier(1,-0.02,.23,.96) both;
   }
 }
 
@@ -81,4 +86,244 @@
 .btn-play:disabled {
   background-color: rgba(255, 255, 255, 0.2);
   transition: all 1s;
+}
+
+/* Pure CSS Material Input */
+.form__field {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.812);
+  outline: 0;
+  font-size: 16px;
+  color: white;
+  padding: 7px 0;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 16px;
+  cursor: text;
+  top: 20px;
+}
+
+label,
+.form__field:focus ~ .form__label {
+  display: block;
+  transition: 0.2s;
+  font-size: 12px;
+  color: white;
+}
+
+.form__field:focus ~ .form__label {
+  color:white;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  border-bottom: 2px solid white;
+}
+
+.form__field:-internal-autofill-selected {
+  background-color: transparent !important;
+}
+
+.feedback-container {
+  align-items: center;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 2px 2px 500px rgba(94, 94, 94, 0.778);
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  justify-content: center;
+  margin: 40px auto 200px auto;
+  padding: 40px;
+  width: 60%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 60vh;
+}
+
+.feedback-container span {
+  font-weight: 800;
+}
+
+.feedback-container p {
+  margin: 5px;
+}
+
+.feedback-container p:last-of-type {
+  margin-bottom: 50px;
+}
+
+.btn-feedback {
+  border: 4px solid rgb(137,41,125);
+  color: rgb(137,41,125);
+  font-weight: 800;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.812);
+  border-radius: 20px;
+  font-size: 20px;
+  padding: 5px;
+  min-width: 250px;
+  margin: 5px;
+}
+
+.ranking-container {
+  align-items: center;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 2px 2px 500px rgba(94, 94, 94, 0.778);
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  justify-content: center;
+  margin: 40px auto 200px auto;
+  padding: 40px;
+  width: 60%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  min-height: 60vh;
+}
+
+.ranking-container h1 {
+  margin-top: 0;
+}
+
+.btn-ranking {
+  border: 4px solid rgb(137,41,125);
+  color: rgb(137,41,125);
+  font-weight: 800;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.812);
+  border-radius: 20px;
+  font-size: 20px;
+  padding: 5px;
+  min-width: 250px;
+  margin: 5px 5px 25px 5px;
+}
+
+.ranking-position-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ranking-position {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px;
+  padding-right: 20px;
+  background-color: rgba(255, 255, 255, 0.812);
+  border-radius: 20px;
+  color: black;
+  min-width: 800px;
+}
+
+.ranking-position img {
+  border-radius: 90px;
+}
+
+.ranking-position p:last-of-type {
+  font-weight: 800;
+}
+
+.trophy {
+  position: relative;
+  height: 40px;
+}
+
+.trophy-container {
+  width: 50px;
+}
+
+.picture-and-rank {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-left: -30px;
+}
+
+.picture-and-rank span {
+  background-color: rgb(137,41,125);
+  border-radius: 180px;
+  padding: 5px;
+  color: white;
+  font-size: 16px;
+  font-style: italic;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 30px;
+  left: 90px;
+}
+
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 18vh;
+  color:white;
+}
+
+.errorContainer h2 {
+  font-style: italic;
+  margin: -80px 0 40px 0;
+}
+
+.errorContainer img {
+  border-radius: 50%;
+}
+
+.errorPic {
+  width: 400px;
+}
+
+.music-container {
+  display: flex;
+  justify-content: center;
+}
+
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  height: 30px;
+}
+
+.settingsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 37vh;
+  color:white;
+}
+
+.settingsContainer h2 {
+  font-style: italic;
+  margin: 0 0 40px 0;
+}
+
+.guide-me-btn {
+  border: 4px solid rgb(137,41,125);
+  color: rgb(137,41,125);
+  font-weight: 800;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.812);
+  border-radius: 20px;
+  font-size: 20px;
+  padding: 5px;
+  min-width: 400px;
+  margin: 5px 5px 25px 5px;
+}
+
+.hidden {
+  display: none;
 }

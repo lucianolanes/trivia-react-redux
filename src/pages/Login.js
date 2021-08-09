@@ -35,6 +35,11 @@ class Login extends React.Component {
   btnClick(destiny) {
     if (destiny === '/trivia') {
       const { name, email } = this.state;
+      if (name === 'Prince Rogers Nelson') {
+        /* Source: https://reactgo.com/react-redirect-to-external-url/ */
+        window.location.href = 'https://www.youtube.com/watch?v=TvnYmWpD_T8';
+        return;
+      }
       const { getPlayer, getQuestions } = this.props;
       const picture = URL_GRAVATAR + md5(email).toString();
       const state = JSON.stringify({
@@ -47,16 +52,19 @@ class Login extends React.Component {
   }
 
   createInput(inputProperties) {
-    const [type, id, value, text, testid, func] = inputProperties;
+    const [type, id, value, text, testid, className, func] = inputProperties;
     return (
-      <input
-        type={ type }
-        id={ id }
-        value={ value }
-        placeholder={ text }
-        data-testid={ testid }
-        onChange={ func }
-      />
+      <label htmlFor={ id }>
+        { text }
+        <input
+          type={ type }
+          id={ id }
+          value={ value }
+          data-testid={ testid }
+          className={ className }
+          onChange={ func }
+        />
+      </label>
     );
   }
 
@@ -84,12 +92,12 @@ class Login extends React.Component {
         <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
           <div className="loginContainer">
-            {createInput(['text', 'name', name, 'NOME:', 'input-player-name',
-              handleChange])}
-            {createInput(['text', 'email', email, 'E-MAIL:', 'input-gravatar-email',
-              handleChange])}
+            {createInput(['text', 'name', name, 'Name:',
+              'input-player-name', 'form__field', handleChange])}
+            {createInput(['text', 'email', email, 'E-mail:', 'input-gravatar-email',
+              'form__field', handleChange])}
             {this.createBtn(['PLAY', 'btn-play', disableBtn, '/trivia', btnClick])}
-            {this.createBtn(['CONFIGURAÇÕES', 'btn-settings', false, '/config',
+            {this.createBtn(['SETTINGS', 'btn-settings', false, '/config',
               btnClick])}
           </div>
         </header>
