@@ -27,7 +27,7 @@
   width: 100%;
 }
 
-.answers-container button {
+.question {
   background-color: rgba(255, 255, 255, 0.916);
   border: 3px solid black;
   border-radius: 20px;
@@ -41,11 +41,11 @@
 }
 
 .correct-answer {
-  border: 3px solid rgb(6, 240, 15) ! important;
+  border: 3px solid rgb(6, 240, 15);
 }
 
 .wrong-answer {
-  border: 3px solid red ! important;
+  border: 3px solid red;
 }
 
 .timer {

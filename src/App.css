@@ -123,10 +123,6 @@ label, .form__field:focus ~ .form__label {
   padding-bottom: 6px;
 }
 
-.form__field:-internal-autofill-selected {
-  background-color: transparent ! important;
-}
-
 .feedback-container {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);

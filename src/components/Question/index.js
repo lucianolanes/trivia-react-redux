@@ -55,7 +55,7 @@ class Question extends React.Component {
         type="button"
         data-testid={ testid }
         id={ testid }
-        className={ answered ? className : '' }
+        className={ answered ? `${className} question` : 'question' }
         disabled={ answered }
         onClick={ this.handleClick }
       >

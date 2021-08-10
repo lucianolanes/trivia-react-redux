@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import * as pages from './pages';
 import purpleRain from './sound/purple_rain.mp3';
+import purpleRainLyrics from './sound/purple_rain_lyrics.vtt';
 // import { connect } from 'react-redux';
 // import { fetchQuestions } from './redux/actions';
 import './App.css';
