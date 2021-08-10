@@ -1,19 +1,18 @@
-
 .loadingContainer {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 35vh;
 }
 
 .loading {
+  color: white;
   display: flex;
   font-size: 40px;
-  color: white;
 }
 
 .loadingGif {
-  margin-top: -10px;
   height: 130px;
+  margin-top: -10px;
 }

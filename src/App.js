@@ -36,12 +36,12 @@ class App extends React.Component {
         </Switch>
         <div className="music-container">
           <audio controls autoPlay loop className="music-player">
-            {/* <track
+            <track
               default
               kind="captions"
               srcLang="en"
               src={ purpleRainLyrics }
-            /> */}
+            />
             <source src={ purpleRain } />
           </audio>
         </div>
