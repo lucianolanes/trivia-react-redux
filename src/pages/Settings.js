@@ -17,9 +17,19 @@ class Settings extends React.Component {
       type: '',
     };
     this.changeHandler = this.changeHandler.bind(this);
+    this.clickBtn = this.clickBtn.bind(this);
     this.makeCategoriesObj = this.makeCategoriesObj.bind(this);
     this.makeSelect = this.makeSelect.bind(this);
-    this.clickBtn = this.clickBtn.bind(this);
+    this.setInitialState = this.setInitialState.bind(this);
+  }
+
+  componentDidMount() {
+    this.setInitialState();
+  }
+
+  setInitialState() {
+    const { category, difficulty, type } = this.props;
+    this.setState({ category, difficulty, type });
   }
 
   clickBtn() {
@@ -32,13 +42,17 @@ class Settings extends React.Component {
     this.setState({ [id]: value });
   }
 
-  makeSelect(text, id, info) {
+  makeSelect(text, id, value, info) {
     const array = (id === 'category') ? Object.entries(info).sort((a, b) => a[1] - b[1])
       : Object.entries(info);
     return (
       <label htmlFor={ id }>
         { text }
-        <select id={ id } onChange={ ({ target }) => this.changeHandler(target) }>
+        <select
+          id={ id }
+          onChange={ ({ target }) => this.changeHandler(target) }
+          value={ value }
+        >
           { array.map((entry) => (
             <option key={ entry[1] } value={ entry[1] }>{ entry[0] }</option>
           ))}
@@ -50,18 +64,19 @@ class Settings extends React.Component {
   makeCategoriesObj() {
     const { categories } = this.props;
     const obj = categories.reduce((acc, { id, name }) => ({ ...acc, [name]: id }), {});
-    return { ...obj, '': null };
+    return { ...obj, '': '' };
   }
 
   render() {
+    const { category, difficulty, type } = this.state;
     const { catLoading } = this.props;
     const { makeSelect, makeCategoriesObj, clickBtn } = this;
     if (catLoading) return <Loading />;
     return (
       <div className="settingsContainer">
-        { makeSelect('Difficulty', 'difficulty', difficulties) }
-        { makeSelect('Type', 'type', types) }
-        { makeSelect('Category', 'category', makeCategoriesObj()) }
+        { makeSelect('Difficulty', 'difficulty', difficulty, difficulties) }
+        { makeSelect('Type', 'type', type, types) }
+        { makeSelect('Category', 'category', category, makeCategoriesObj()) }
         <h2 data-testid="settings-title">You can&apos;t seem to make up your mind</h2>
         <h2>I think you better close it.</h2>
         <Button
@@ -76,6 +91,9 @@ class Settings extends React.Component {
 }
 
 Settings.propTypes = {
+  category: PropTypes.string.isRequired,
+  difficulty: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   catLoading: PropTypes.bool.isRequired,
   updateConfigs: PropTypes.func.isRequired,
