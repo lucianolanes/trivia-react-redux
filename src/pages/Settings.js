@@ -73,18 +73,20 @@ class Settings extends React.Component {
     const { makeSelect, makeCategoriesObj, clickBtn } = this;
     if (catLoading) return <Loading />;
     return (
-      <div className="settingsContainer">
-        { makeSelect('Difficulty', 'difficulty', difficulty, difficulties) }
-        { makeSelect('Type', 'type', type, types) }
-        { makeSelect('Category', 'category', category, makeCategoriesObj()) }
-        <h2 data-testid="settings-title">You can&apos;t seem to make up your mind</h2>
-        <h2>I think you better close it.</h2>
-        <Button
-          text="GUIDE ME TO THE PURPLE RAIN"
-          linkTo="/"
-          className="guide-me-btn"
-          onClick={ clickBtn }
-        />
+      <div className="settingsPage">
+        <div className="settingsContainer">
+          { makeSelect('Difficulty', 'difficulty', difficulty, difficulties) }
+          { makeSelect('Type', 'type', type, types) }
+          { makeSelect('Category', 'category', category, makeCategoriesObj()) }
+          <h2 data-testid="settings-title">You can&apos;t seem to make up your mind</h2>
+          <h2>I think you better close it.</h2>
+          <Button
+            text="GUIDE ME TO THE PURPLE RAIN"
+            linkTo="/"
+            className="guide-me-btn"
+            onClick={ clickBtn }
+          />
+        </div>
       </div>
     );
   }
