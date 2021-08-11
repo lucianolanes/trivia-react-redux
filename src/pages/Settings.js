@@ -46,18 +46,24 @@ class Settings extends React.Component {
     const array = (id === 'category') ? Object.entries(info).sort((a, b) => a[1] - b[1])
       : Object.entries(info);
     return (
-      <label htmlFor={ id }>
-        { text }
+      <div className="select">
         <select
           id={ id }
           onChange={ ({ target }) => this.changeHandler(target) }
           value={ value }
+          className="select-text"
+          required
         >
           { array.map((entry) => (
             <option key={ entry[1] } value={ entry[1] }>{ entry[0] }</option>
           ))}
         </select>
-      </label>
+        <span className="select-highlight" />
+        <span className="select-bar" />
+        <label htmlFor={ id } className="select-label">
+          { text }
+        </label>
+      </div>
     );
   }
 
