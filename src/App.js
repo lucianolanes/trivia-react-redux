@@ -32,7 +32,7 @@ class App extends React.Component {
           <Route path="/trivia" component={ pages.Trivia } />
           <Route path="/feedback" component={ pages.Feedback } />
           <Route path="/ranking" component={ pages.Ranking } />
-          <Route path="/config" component={ pages.Config } />
+          <Route path="/settings" component={ pages.Settings } />
           <Route path="*" component={ pages.Error404 } />
         </Switch>
         <div className="music-container">
