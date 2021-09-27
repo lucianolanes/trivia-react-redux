@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/trivia-react-redux/static/css/main.ef090a8e.chunk.css",
+    "main.js": "/trivia-react-redux/static/js/main.f5cbd97c.chunk.js",
+    "main.js.map": "/trivia-react-redux/static/js/main.f5cbd97c.chunk.js.map",
+    "runtime-main.js": "/trivia-react-redux/static/js/runtime-main.460e2238.js",
+    "runtime-main.js.map": "/trivia-react-redux/static/js/runtime-main.460e2238.js.map",
+    "static/js/2.7b395c4c.chunk.js": "/trivia-react-redux/static/js/2.7b395c4c.chunk.js",
+    "static/js/2.7b395c4c.chunk.js.map": "/trivia-react-redux/static/js/2.7b395c4c.chunk.js.map",
+    "index.html": "/trivia-react-redux/index.html",
+    "precache-manifest.7f3bfa714ac28f187f7e12482e90b9d6.js": "/trivia-react-redux/precache-manifest.7f3bfa714ac28f187f7e12482e90b9d6.js",
+    "service-worker.js": "/trivia-react-redux/service-worker.js",
+    "static/css/main.ef090a8e.chunk.css.map": "/trivia-react-redux/static/css/main.ef090a8e.chunk.css.map",
+    "static/js/2.7b395c4c.chunk.js.LICENSE": "/trivia-react-redux/static/js/2.7b395c4c.chunk.js.LICENSE",
+    "static/media/index.css": "/trivia-react-redux/static/media/background.23642800.jpg",
+    "static/media/bronze.png": "/trivia-react-redux/static/media/bronze.c9c50958.png",
+    "static/media/error.png": "/trivia-react-redux/static/media/error.c922d44e.png",
+    "static/media/gold.png": "/trivia-react-redux/static/media/gold.6c75b9d2.png",
+    "static/media/loading.png": "/trivia-react-redux/static/media/loading.f89c84a7.png",
+    "static/media/purple-rain.gif": "/trivia-react-redux/static/media/purple-rain.1ae81289.gif",
+    "static/media/purple_rain.mp3": "/trivia-react-redux/static/media/purple_rain.385d34f6.mp3",
+    "static/media/purple_rain_lyrics.vtt": "/trivia-react-redux/static/media/purple_rain_lyrics.74cafa2e.vtt",
+    "static/media/silver.png": "/trivia-react-redux/static/media/silver.3178060b.png",
+    "static/media/trivia.png": "/trivia-react-redux/static/media/trivia.5ca37e73.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.460e2238.js",
+    "static/js/2.7b395c4c.chunk.js",
+    "static/css/main.ef090a8e.chunk.css",
+    "static/js/main.f5cbd97c.chunk.js"
+  ]
+}
