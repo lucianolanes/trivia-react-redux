@@ -3,22 +3,9 @@ import { Switch, Route } from 'react-router';
 import * as pages from './pages';
 import purpleRain from './sound/purple_rain.mp3';
 import purpleRainLyrics from './sound/purple_rain_lyrics.vtt';
-// import { connect } from 'react-redux';
-// import { fetchQuestions } from './redux/actions';
 import './App.css';
 
 class App extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.purpleRainMP3 = new Audio(purpleRain);
-  // }
-
-  // componentDidMount() {
-  //   this.purpleRainMP3.play();
-  //   this.purpleRainMP3.volume = 0.33;
-  //   this.purpleRainMP3.loop = true;
-  // }
-
   componentDidMount() {
     const audio = document.querySelector('audio');
     audio.volume = 0.33;
@@ -28,7 +15,7 @@ class App extends React.Component {
     return (
       <>
         <Switch>
-          <Route exact path="/" component={ pages.Login } />
+          <Route exact path="/trivia-react-redux/" component={ pages.Login } />
           <Route path="/trivia" component={ pages.Trivia } />
           <Route path="/feedback" component={ pages.Feedback } />
           <Route path="/ranking" component={ pages.Ranking } />
