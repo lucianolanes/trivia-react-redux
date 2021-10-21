@@ -73,7 +73,7 @@ class Ranking extends React.Component {
 
     return (
       <section className="ranking-container">
-        { redirect && <Redirect to="/" /> }
+        { redirect && <Redirect to="/trivia-react-redux" /> }
         <h1 data-testid="ranking-title">Ranking</h1>
         <button
           type="button"

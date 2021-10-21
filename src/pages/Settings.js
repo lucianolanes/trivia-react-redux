@@ -88,7 +88,7 @@ class Settings extends React.Component {
           <h2>I think you better close it.</h2>
           <Button
             text="GUIDE ME TO THE PURPLE RAIN"
-            linkTo="/"
+            linkTo="/trivia-react-redux"
             className="guide-me-btn"
             onClick={ clickBtn }
           />

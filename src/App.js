@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <>
         <Switch>
-          <Route exact path="/trivia-react-redux/" component={ pages.Login } />
+          <Route path="/trivia-react-redux" component={ pages.Login } />
           <Route path="/trivia" component={ pages.Trivia } />
           <Route path="/feedback" component={ pages.Feedback } />
           <Route path="/ranking" component={ pages.Ranking } />
@@ -37,11 +37,5 @@ class App extends React.Component {
     );
   }
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   getQuestions: () => dispatch(fetchQuestions()),
-// });
-
-// export default connect(null, mapDispatchToProps)(App);
 
 export default App;

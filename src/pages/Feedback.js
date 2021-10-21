@@ -72,7 +72,7 @@ class Feedback extends React.Component {
             <Button
               testId="btn-play-again"
               text="PLAY AGAIN"
-              linkTo="/"
+              linkTo="/trivia-react-redux"
               className="btn-feedback"
             />
           </div>
